@@ -1,0 +1,12 @@
+body{
+background-color: rgb(28, 28, 117);
+color:rgb(252, 252, 252);
+}
+
+div{
+    border: 10px antiquewhite solid;
+}
+
+#contenedor{
+    border: 10px aqua solid;
+}
