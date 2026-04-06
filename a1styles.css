@@ -1,0 +1,31 @@
+body{
+    background-color: rgb(192, 125, 0);
+}
+
+#html{
+    border: 30px rgb(255, 0, 234) solid;
+    color:cyan
+}
+
+
+#css{
+    border: 30px rgb(0, 255, 0) solid;
+    color: rgb(255, 251, 0);
+}
+
+.titulo1{
+    font-size: 100px;
+}
+.titulo2{
+    font-size: 50px;
+}
+.titulo3{
+    font-size: 25px;
+    text-align: right;
+    text-wrap: balance;
+}
+.titulo4{
+    font-size: 20px;
+}
+
+
