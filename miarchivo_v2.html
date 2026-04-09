@@ -3,12 +3,33 @@
 <head>
     <title>Clase antes de vacaciones</title>
     <link rel="stylesheet" href="estilos.css">
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </head>
 <body >
    <div id="contenedor">
      <div class="elemento"> Sección 1</div>
      <div class="elemento"> Sección 2</div>
+     <div class="elemento"> Sección 3</div>
    </div> 
+   
+   <div id="contenedor2">
+     <div class="elemento"> Sección 1</div>
+     <div class="elemento"> Sección 2</div>
+     <div class="elemento"> Sección 3</div>
+     <div class="elemento"> Sección 4</div>
+   </div>
+   <div id="contart">
+      <button type="button" class="btn btn-primary" id="titulo">Cliccckkk</button>
+      <button type="button" class="btn btn-danger" id="art1">Maneskin</button>
+      <button type="button" class="btn btn-success" id="art2">Luis Miguel</button>
+   </div>
+   <div id="encabezado">
+      <h6>no</h6>
+   </div>
+
+
+   
   
   <style >
     
@@ -19,10 +40,102 @@
    
 
   
-
   
 <script >
+      let t = 1986;
+      const c = 3.28;
+
+      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+      const triplicar = (a) => { return 3 * a} ;
+
+      let d=document.createElement("p");
+      d.textContent="hola";
+      d.setAttribute("style", "color: red")
+
+      document.getElementById("encabezado").appendChild(d);
+    
+      async function obtenerJSON() {
+        const respuesta = await fetch('archivo.json');
+        const datos = await respuesta.json();
+        console.log(datos);
       
+        let a = document.createElement("p");
+        a.textContent=datos.autor;
+        a.setAttribute("style", "color: orange");
+        document.getElementById("encabezado").appendChild(a);
+
+      }
+
+      async function obtenerJSON2() {
+        const respuesta = await fetch('http://openlibrary.org/subjects/love.json?published_in=1500-1600');
+        const datos = await respuesta.json();
+        console.log(datos);
+      
+        let a = document.createElement("p");
+        a.textContent=datos.works[0].title;
+        a.setAttribute("style", "color: orange");
+        document.getElementById("encabezado").appendChild(a);
+
+      }
+
+      async function obtenerJSON3() {
+        const respuesta = await fetch('http://openlibrary.org/subjects/love.json?published_in=1500-1600');
+        const datos = await respuesta.json();
+        console.log(datos);
+      
+        let a = document.createElement("p");
+        a.textContent=datos.works[1].title;
+        a.setAttribute("style", "color: green");
+        document.getElementById("encabezado").appendChild(a);
+
+      }
+
+
+      let b = document.getElementById("titulo");
+      b.addEventListener("click", obtenerJSON3);
+
+      async function obtenerJSONArtist() {
+        const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=maneskin');
+        const datos = await respuesta.json();
+        console.log(datos);
+
+        let a = document.createElement("p");
+        a.textContent=datos.artists[0].strBiography;
+        a.setAttribute("style", "color: red");
+        document.getElementById("encabezado").appendChild(a);
+
+        let imglink = datos.artists[0].strArtistThumb;
+        let i = document.createElement("img");
+        i.setAttribute("src", imglink);
+        
+        document.getElementById("encabezado").appendChild(i);
+      }
+
+      document.getElementById("art1").addEventListener("click", obtenerJSONArtist);
+
+      async function obtenerJSONArtist2() {
+        const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=Luis+Miguel');
+        const datos = await respuesta.json();
+        console.log(datos);
+
+        let a = document.createElement("p");
+        a.textContent=datos.artists[0].strBiographyES;
+        a.setAttribute("style", "color: red");
+        document.getElementById("encabezado").appendChild(a);
+
+        let imglink = datos.artists[0].strArtistThumb;
+        let i = document.createElement("img");
+        i.setAttribute("src", imglink);
+        document.getElementById("encabezado").appendChild(i);
+      }
+
+      document.getElementById("art2").addEventListener("click", obtenerJSONArtist2);
+
+
+      obtenerJSON();
+      obtenerJSON2();
+
 </script>
 
 

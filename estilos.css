@@ -8,5 +8,22 @@ div{
 }
 
 #contenedor{
-    border: 10px aqua solid;
+    border: 10px rgb(0, 110, 255) solid;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#contenedor2{
+    border: 10px rgb(0, 110, 255) solid;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 3fr;
+}
+
+#contart{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
