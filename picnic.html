@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi página con Picnic CSS</title>
+  
+
+<link rel="stylesheet" href="https:cdn.jsdelivr.net/npm/picnic">
+
+  
+  <style>
+    .flex.demo{
+     margin: .2em 0;
+     background: #dbe2dc;
+     text-align: center;
+    }
+    .flex.demo div {
+      border:.1em solid pink;
+    }
+
+  </style>
+</head>
+<body>
+  
+
+  <button id="un_boton">Haz algo</button>
+  <div class="flex two four-1200 demo">
+    <div id="bio">1</div>
+    <div id="imagen">2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+  
+  </div>
+
+    <script>
+    
+    let un_boton;
+
+    document.addEventListener("DOMContentLoaded", function() {
+          un_boton = document.getElementById('un_boton');
+          un_boton.addEventListener("click", irPorAlgo());
+          console.log("DOM listo");
+    });
+
+    async function irPorAlgo() {
+        try {
+                const respuesta = await fetch("https://api.thedogapi.com/v1/images/search?limit=1",      {
+                method: "GET", 
+                headers: {
+                    "x-api-key": "live_UraDZ58kNr2EdavYcsjCK3SYsmln3xMm1w7aPDC275oho5wFYP2XQQXz2UTm9MgY"
+                }
+        });
+            if (!respuesta.ok) {
+            console.log("Error");
+            //throw new Error("Error");
+            }
+            const data = await respuesta.json();
+            console.log(data);
+            let imglink = data.url;
+            let i = document.createElement("img");
+            i.setAttribute("src", imglink);
+        } catch (error) {
+            console.error("Error:", error.message);
+        }
+    }
+
+
+     async function obtenerJSON() {
+        const respuesta = await fetch('');  
+        const datos = await respuesta.json();
+        console.log(datos);
+
+        const textoArtista = document.createElement('p');
+        textoArtista.textContent = 
+        biografia.appendChild(textoArtista);
+
+        const imagenArtista= document.createElement('');
+        
+        imagenArtista.setAttribute('src', '');
+     }
+
+
+
+    </script>
+
+    <div class="tabs two">
+        <input id='tab-1' type='radio' name='tabgroupB' checked />
+        <label class="pseudo button toggle" for="tab-1">Q1</label>
+        <input id='tab-2' type='radio' name='tabgroupB'>
+        <label class="pseudo button toggle" for="tab-2">Q2</label>
+        <div class="row">
+            <div>
+            <h1>¿Cómo vas con tu reto?</h1>
+            <h3>En el reto vamos bien, tenemos bien definida la problemática y ya tenemos algunas ideas que podríamos llegar a implementar.</h3>
+            </div>
+
+            <div>
+            <h1>¿Qué te parece lo más complicado de tu reto?</h1>
+            <h3>Lo más complicado de mi reto yo creo que va a ser congeniar todo perfectamente dentro de una misma extensión </h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
