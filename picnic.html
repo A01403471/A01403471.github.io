@@ -34,16 +34,24 @@
     <div>6</div>
     <div>7</div>
     <div>8</div>
+    
   
   </div>
+
+  <button id="voto">Votar</button>
 
     <script>
     
     let un_boton;
+    let voto;
+    voto = document.getElementById("voto");
+    voto.addEventListener("click", votar);
+    let id_perro;
+
 
     document.addEventListener("DOMContentLoaded", function() {
-          un_boton = document.getElementById('un_boton');
-          un_boton.addEventListener("click", irPorAlgo());
+            un_boton = document.getElementById('un_boton');
+            document.getElementById("un_boton").addEventListener("click", irPorAlgo);
           console.log("DOM listo");
     });
 
@@ -61,28 +69,39 @@
             }
             const data = await respuesta.json();
             console.log(data);
-            let imglink = data.url;
-            let i = document.createElement("img");
-            i.setAttribute("src", imglink);
+            id_perro = data[0].id;
+            let imglink = data[0].url;
+            let imagen = document.createElement("img");
+            imagen.setAttribute("src", imglink);
+            
+            document.getElementById("imagen").appendChild(imagen);
         } catch (error) {
             console.error("Error:", error.message);
         }
     }
 
-
-     async function obtenerJSON() {
-        const respuesta = await fetch('');  
-        const datos = await respuesta.json();
-        console.log(datos);
-
-        const textoArtista = document.createElement('p');
-        textoArtista.textContent = 
-        biografia.appendChild(textoArtista);
-
-        const imagenArtista= document.createElement('');
-        
-        imagenArtista.setAttribute('src', '');
-     }
+    async function votar(id){
+        try {
+            const respuesta = await fetch("https://api.thedogapi.com/v1/votes" ,    {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'x-api-key': 'live_UraDZ58kNr2EdavYcsjCK3SYsmln3xMm1w7aPDC275oho5wFYP2XQQXz2UTm9MgY'
+                },
+                body: JSON.stringify({
+                    image_id: id_perro,
+                    value: 1
+                }),
+            });
+            if (!respuesta.ok) {
+                throw new Error('Error');
+            }
+            const data = await respuesta.json();
+            console.log(data);
+        } catch (error){
+            console.log("Error: ", error.message);
+        }
+    }
 
 
 
