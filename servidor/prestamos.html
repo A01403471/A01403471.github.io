@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prestamos</title>
+    </head>
+    <body>
+        <h1>Prestamos: </h1>
+        <div id="output"></div>
+        <br>
+        <br>
+        <br>
+        
+        <h1>Agregar Prestamos: </h1>
+        <form>
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="nombre"><br><br>
+            <label for="monto">Monto:</label>
+            <input type="text" id="monto" name="saldo"><br><br>
+        </form>
+        <button id="enviar">Enviar</button>
+        <p id="a"></p>
+        <script>
+            fetch('/api/prestamos')
+                .then(response => response.json())
+                .then(data => {
+                    let output = ' ';
+                    for (let i in data.prestamos)
+                        {
+                            output += '<h2>' + data.prestamos[i].usuario + '</h2>';
+                            output += '<h4>Saldo: ' + data.prestamos[i].monto + '</h4>';
+                        }
+                        document.getElementById("output").innerHTML = output;
+                })
+                .catch(error => console.error('Error:', error));
+
+            async function enviarDatos(usuario, monto){
+                let a = document.createElement("p");
+                a.textContent = "Agregado el prestamo para el usuario: " + usuario + ", con el monto de: " + monto + " a la base de datos (temporalmente no funcional)"
+                document.getElementById("a").appendChild(a);
+            }
+
+            document.getElementById("enviar").addEventListener("click", () => {
+                enviarDatos(
+                    document.getElementById("usuario").value,
+                    document.getElementById("monto").value
+                );
+            });
+
+        </script>
+
+        <a href="/">Bienvenida</a>
+    </body>
+</html>

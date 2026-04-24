@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Usuarios</title>
+    </head>
+    <body>
+        <h1>Usuarios: </h1>
+        <div id="output"></div>
+        <br>
+        <br>
+        <br>
+        
+        <h1>Agregar Usuarios: </h1>
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"><br><br>
+            <label for="saldo">Saldo:</label>
+            <input type="text" id="saldo" name="saldo"><br><br>
+        </form>
+        <button id="enviar">Enviar</button>
+        <p id="a"></p>
+        <script>
+            fetch('/api/usuarios')
+                .then(response => response.json())
+                .then(data => {
+                    let output = ' ';
+                    for (let i in data.usuarios)
+                        {
+                            output += '<h2>' + data.usuarios[i].nombre + '</h2>';
+                            output += '<h4>Saldo: ' + data.usuarios[i].saldo + '</h4>';
+                        }
+                        document.getElementById("output").innerHTML = output;
+                })
+                .catch(error => console.error('Error:', error));
+
+            async function enviarDatos(nombre, saldo){
+                let a = document.createElement("p");
+                a.textContent = "Agregado: " + nombre + ", con el saldo de: " + saldo + " a la base de datos (temporalmente no funcional)"
+                document.getElementById("a").appendChild(a);
+            }
+
+            document.getElementById("enviar").addEventListener("click", () => {
+                enviarDatos(
+                    document.getElementById("nombre").value,
+                    document.getElementById("saldo").value
+                );
+            });
+
+        </script>
+
+        <a href="/">Bienvenida</a>
+    </body>
+</html>

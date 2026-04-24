@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Movimientos</title>
+    </head>
+    <body>
+        <h1>Movimientos</h1>
+        <div id="output"></div>
+
+        <script>
+                fetch('/api/movimientos')
+                    .then(response => response.json())
+                    .then(data => {
+                        let output = ' ';
+                        for (let i in data.movimientos)
+                            {
+                                output += '<h2> Movimiento #' + i + ':';
+                                output += '<h4>Tipo: ' + data.movimientos[i].tipo + '  |   Monto: $' + data.movimientos[i].monto + '</h4>';
+                            }
+                            document.getElementById("output").innerHTML = output;
+                    })
+                    .catch(error => console.error('Error:', error));
+        </script>
+
+        <a href="/">Bienvenida</a>
+    </body>
+</html>
